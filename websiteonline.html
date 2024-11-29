@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEVENTEEN</title>
+    <style>
+        body {
+            font-family: 'Cambria', serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            font-size: 18px;
+        }
+
+        header {
+            background: linear-gradient(to right, #B2E0F0, #FFB2D0);
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .menu {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 20px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .menu a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            display: flex;
+            margin: 20px;
+        }
+
+        .sidebar-left {
+            flex: 1;
+            background-color: #A9D1F7;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-right: 20px;
+        }
+
+        .sidebar-left h3 {
+            margin-top: 0;
+            color: #e75069;
+        }
+
+        .font-size-options {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .font-size-options li {
+            margin: 10px 0;
+        }
+
+        .font-size-options a {
+            text-decoration: none;
+            color: #3498db;
+            cursor: pointer;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        .font-size-options a:hover {
+            color: #ff80ff;
+        }
+
+        .main-content {
+            flex: 3;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: justify;
+        }
+
+        .sidebar-right {
+            flex: 1;
+            padding: 20px;
+            margin-left: 20px;
+            background-color: #FADADD;
+        }
+
+        footer {
+            background-color: #f7aaf3;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Fullscreen modal styles */
+        #fullscreenModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        #fullscreenModal img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        #fullscreenModal span {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .card {
+            background-color: white;
+            padding: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .card img {
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 20px;
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        .card p {
+            font-size: 16px;
+            color: #7f8c8d;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+        .gallery {
+    text-align: center;
+    margin: 20px;
+}
+
+.photo-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.photo-row img {
+    width: 45%; /* Atur ukuran agar tidak terlalu besar */
+    height: auto;
+    border-radius: 5px; /* Opsional untuk sudut bulat */
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>CARATs, Are You Ready to See SEVENTEEN in Jakarta?</h1>
+    </header>
+
+    <div class="menu">
+        <a onclick="showContent('home')">Home</a>
+        <a onclick="showContent('panduan')">Panduan</a>
+        <a onclick="showContent('contact')">Contact</a>
+        <a onclick="showContent('about')">About</a>
+        <a onclick="showContent('gallery')">Gallery</a>
+    </div>
+
+    <div class="container">
+        <div class="sidebar-left">
+            <h3>Ukuran Font</h3>
+            <ul class="font-size-options">
+                <li><a onclick="changeFontSize('small')">Kecil</a></li>
+                <li><a onclick="changeFontSize('medium')">Sedang</a></li>
+                <li><a onclick="changeFontSize('large')">Besar</a></li>
+            </ul>
+        </div>
+
+        <div class="main-content" id="content-area">
+            <!-- Konten akan dimuat menggunakan JavaScript -->
+        </div>
+
+        <div class="sidebar-right">
+            <div class="card" onclick="openFullscreen('https://i.pinimg.com/564x/61/f0/2f/61f02faf3aa23a60bb7fa7fe75ad5500.jpg')">
+                <img src="https://i.pinimg.com/564x/61/f0/2f/61f02faf3aa23a60bb7fa7fe75ad5500.jpg" alt="Image 1">
+                <h3>Member Seventeen</h3>
+                <p>Kenali lebih dekat setiap member dari SEVENTEEN.</p>
+            </div>
+            <div class="card" onclick="openFullscreen('https://i.pinimg.com/736x/1f/05/38/1f05388c8bd83ff08f19d6a03a0a2d7f.jpg')">
+                <img src="https://i.pinimg.com/736x/1f/05/38/1f05388c8bd83ff08f19d6a03a0a2d7f.jpg" alt="Image 2">
+                <h3>Going Seventeen</h3>
+                <p>Saksikan momen-momen seru dari program Going Seventeen.</p>
+            </div>
+            <div class="card" onclick="openFullscreen('https://i.pinimg.com/736x/f3/47/ce/f347ce252ebd30473bbbaa8d0e91e3e8.jpg')">
+                <img src="https://i.pinimg.com/736x/f3/47/ce/f347ce252ebd30473bbbaa8d0e91e3e8.jpg" alt="Image 3">
+                <h3>Album Terbaru</h3>
+                <p>Lihat informasi mengenai album terbaru Seventeen!</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Hak Cipta &copy; 2024 - NABILA AULIA PRIANGKA (E1R022072)</p>
+    </footer>
+
+    <div id="fullscreenModal" onclick="closeFullscreen()">
+        <span>&times;</span>
+        <img id="fullscreenImage" src="" alt="Fullscreen Image">
+    </div>
+
+    <script>
+        const contents = {
+            home: `
+                <h2>"SEVENTEEN Right Here Tour Jakarta: Konser yang Ditunggu CARATs"</h2>
+                <p>Grup K-pop SEVENTEEN kembali menunjukkan daya tarik mereka yang luar biasa di Indonesia. Melalui tur dunia bertajuk <strong>Right Here</strong>, SEVENTEEN akan tampil di Jakarta International Stadium (JIS) pada <strong>8 Februari 2025</strong> dan <strong>9 Februari 2025</strong>, setelah adanya penambahan hari konser akibat tingginya permintaan dari penggemar.</p>
+                <p>Antusiasme besar dari <strong>CARATs</strong> (sebutan penggemar SEVENTEEN) terlihat sejak presale tiket dibuka. Promotor Mecimapro akhirnya memutuskan untuk menambah hari kedua konser guna mengakomodasi lebih banyak penonton.</p>
+                <img src="https://akcdn.detik.net.id/visual/2024/10/30/seventeen_169.jpeg?w=650&q=80" alt="seventeen ot13" style="width: 100%; height: auto; border-radius: 0px; margin-bottom: 20px;">
+                <h3>Harga Tiket dan Kategori</h3>
+                <p>Tiket konser dijual dalam berbagai kategori, mulai dari harga <strong>Rp1.600.000</strong> hingga <strong>Rp3.800.000</strong>. Ada juga opsi eksklusif seperti <em>Pink Soundcheck Package</em>, yang memberikan pengalaman istimewa bagi para penggemar.</p>
+                <p><strong>Berikut daftar harga tiker konser SEVENTEEN di Jakarta International Stadium (JIS)</p></strong>
+            <ul>
+                <li>Pink Soundcheck Package: Rp3.800.000</li>
+                <li>Orange: Rp3.400.000</li>
+                <li>Blue: Rp3.200.000</li>
+                <li>Purple: Rp3.000.000</li>
+                <li>Yellow: Rp2.600.000</li>
+                <li>Green: Rp1.600.000</li>
+            </ul>
+            <p>Harga tiket sudah termasuk pajak, namun belum termasuk biaya admin.</p>
+                <h3>Siapa yang Hadir?</h3>
+                <p>Dari 13 anggota SEVENTEEN, dua anggota dipastikan absen. <strong>Jeonghan</strong> tidak hadir karena menjalani wajib militer, sedangkan <strong>Jun</strong> memiliki jadwal karier akting di China. Meski demikian, konser ini tetap menjanjikan aksi spektakuler dari 11 anggota lainnya.</p>
+                <h3>Catat Tanggal Pentingnya!</h3>
+                <p>Konser pertama akan dimulai pada pukul <strong>18:30 WIB</strong> di hari Sabtu, <strong>8 Februari 2025</strong>. Jika Anda belum mendapatkan tiket, pastikan untuk memantau situs resmi seperti <a href="https://www.tiket.com" target="_blank">Tiket.com</a> untuk informasi pembelian.</p>
+                <p>Konser SEVENTEEN di Jakarta menjadi salah satu yang paling dinanti, dan dengan tambahan hari kedua, lebih banyak CARATs dapat merasakan energi luar biasa dari grup idol ini di atas panggung. Jangan sampai ketinggalan!</p>
+                    `,
+            panduan: `
+            <h2>Panduan Membeli Tiket Konser SEVENTEEN</h2>
+           
+            <img src="https://cms.disway.id/uploads/4bc994c13a9fefead0ba6a3a6196af00.png" alt="seventeen ot13" style="width: 100%; height: auto; border-radius: 0px; margin-bottom: 15px;">
+            <p>Tiket.com sebagai official ticketing partner membagikan tata cara pembelian tiket konser SEVENTEEN di JIS.</P>
+            <ol>
+                <li><strong>Persiapkan akun</strong>: Buat akun di <a href="https://www.tiket.com" target="_blank">tiket.com</a>. Pastikan Anda sudah login sebelum waktu penjualan dimulai.</li>
+                <li><strong>Registrasi presale</strong>: Jika applicable, pastikan nomor membership Anda terdaftar untuk akses presale.</li>
+                <li><strong>Masuk ke platform</strong>: Login ke akun platform (tiket.com atau Weverse) sebelum waktu penjualan dimulai.</li>
+                <li><strong>Pilih kategori tiket</strong>: Tentukan kategori tiket sesuai preferensi dan anggaran.</li>
+                <li><strong>Lanjutkan pembayaran</strong>: Ikuti instruksi pembayaran di platform tersebut.</li>
+            </ol>
+                <p>Dikutip dari Instagram @tiketcom, berikut cara beli tiket konser SEVENTEEN di Jakarta.</p>
+            <ul>
+                <li>Pastikan sudah login, lalu klik icon "Event"</li>
+                <li>Cari tiket SEVENTEEN [RIGHT HERE] World Tour in Jakarta</li>
+                <li>Kamu akan masuk ke waiting room</li>
+                <li>Saat penjualan dimulai, kamu akan masuk ke dalam antrean</li>
+                <li>Setelah masuk, pilih kategori dan jumlah tiket (maksimal 4 tiket)</li>
+                <li>Isi detail pemesanan dengan benar. Lalu, klik "Lanjutkan pembayaran"</li>
+                <li>Pilih metode pembayaran dan segera bayar pesananmu</li>
+                <li>Setelah berhasil, pesananmu ada di halaman "Your Orders"</li>
+            </ul>
+            <p>Pastikan koneksi internet stabil dan log in sebelum penjualan dimulai untuk mempercepat proses.</p>
+            <h3>Jadwal Penjualan</h3>
+            <ul>
+                <li><strong>CARAT Membership Presale:</strong> 13 November 2024, pukul 13.00-23.59 WIB.</li>
+                <li><strong>MCP Membership Presale:</strong> 14 November 2024, pukul 13.00-23.59 WIB.</li>
+                <li><strong>General Onsale:</strong> 15 November 2024, mulai pukul 13.00 WIB.</li>
+            </ul>
+            <p>Informasi lengkap tersedia di <a href="https://www.tiket.com" target="_blank">tiket.com</a>.</p>
+            `,
+            contact: `
+                <section id="contact">
+                    <h2>Contact Us</h2>
+                    <p>Untuk informasi lebih lanjut tentang konser SEVENTEEN di Jakarta, Anda dapat menghubungi kami melalui:</p>
+                    <ul>
+                        <li>Instagram: <a href="https://www.instagram.com/tiketcom?igsh=MXd3OXM1aHFyNDZ2eA==">@tiket.com</a></li>
+                        <li>WhatsApp: <a href="https://wa.me/6287853194410" target="_blank">Klik di sini untuk WhatsApp</a></li>
+                    </ul>
+                    <p>Atau ikuti SEVENTEEN di media sosial untuk informasi terbaru:</p>
+                    <ul>
+                        <li>Instagram: <a href="https://www.instagram.com/saythename_17?igsh=MWYwOHN4amdtMHJ2eQ==" target="_blank">@saythename_17</a></li>
+                        <li>Tiktok: <a href="https://www.tiktok.com/@seventeen17_official?_t=8rSKAHt7YKS&_r=1" target="_blank">SEVENTEEN</a></li>
+                    </ul>
+                </section>
+            `,
+            about: `
+                 <h2>Unveiling the Charms of SEVENTEEN's Members</h2>
+                 <img src="https://i.pinimg.com/736x/ae/e3/c7/aee3c705d6fc8858d3ea0160a319607c.jpg" alt="seventeen ot13" style="width: 100%; height: auto; border-radius: 0px; margin-bottom: 15px;">
+              <ol>
+                <li><strong>Choi Seungcheol (S.Coups)</strong> - Leader, Leader of Hip-Hop Team, Rapper, Sub Vocalist</li>
+                <li><strong>Yoon Jeonghan</strong> - Lead Vocalist, Visual</li>
+                <li><strong>Joshua Hong</strong> - Lead Vocalist, Visual</li>
+                <li><strong>Wen Junhui (Jun)</strong> - Main Dancer, Sub Vocalist</li>
+                <li><strong>Kwon Soonyoung (Hoshi)</strong> - Main Dancer, Main Vocalist, Sub Rapper</li>
+                <li><strong>Jeon Wonwoo</strong> - Rapper, Sub Vocalist</li>
+                <li><strong>Lee Jihoon (Woozi)</strong> - Vocal Team Leader, Lead Vocalist, Producer</li>
+                <li><strong>Lee Seokmin (DK)</strong> - Lead Vocalist</li>
+                <li><strong>Kim Mingyu</strong> - Rapper, Sub Vocalist, Visual, Face of the Group</li>
+                <li><strong>Xu Minghao (The8)</strong> - Main Dancer, Sub Vocalist, Sub Rapper</li>
+                <li><strong>Boo Seungkwan</strong> - Lead Vocalist, Face of the Group</li>
+                <li><strong>Chwe Hansol (Vernon)</strong> - Rapper, Sub Vocalist, Visual, Face of the Group</li>
+                <li><strong>Lee Chan (Dino)</strong> - Main Dancer, Sub Vocalist, Sub Rapper, Maknae</li>
+              </ol>
+                <h3>Hip-Hop Unit</h3>
+                <ul>
+                    <li><strong>S.Coups</strong> (에스쿱스): Lahir sebagai Choi Seungcheol (최승철) pada 8 Agustus 1995 (umur 29) di Daegu, Korea Selatan. Ia adalah leader utama grup sekaligus leader untuk unit Hip-Hop.</li>
+                    <li><strong>Wonwoo</strong> (원우): Lahir sebagai Jeon Wonwoo (전원우) pada 17 Juli 1996 (umur 28) di Changwon, Gyeongsangnam-do, Korea Selatan.</li>
+                    <li><strong>Mingyu</strong> (민규): Lahir sebagai Kim Mingyu (김민규) pada 6 April 1997 (umur 27) di Anyang, Korea Selatan.</li>
+                    <li><strong>Vernon</strong> (버논): Lahir sebagai Chwe Hansol Vernon dengan nama korea Choi Hansol (최한솔) pada 18 Februari 1998 (umur 26) di New York, Amerika Serikat.</li>
+                </ul>
+                <h3>Vocal Unit</h3>
+                <ul>
+                    <li><strong>Woozi</strong> (우지): Lahir sebagai Lee Jihoon (이지훈) pada 22 November 1996 (umur 27) di Busan, Korea Selatan. Ia adalah leader untuk unit vokal.</li>
+                    <li><strong>Jeonghan</strong> (정한): Lahir sebagai Yoon Jeonghan (윤정한) pada 4 Oktober 1995 (umur 29) di Hwaseong, Korea Selatan.</li>
+                    <li><strong>Joshua</strong> (조슈아): Lahir sebagai Joshua Hong dengan nama Korea Hong Jisoo (홍지수) pada 30 Desember 1995 (umur 28) dari Los Angeles, California, Amerika Serikat.</li>
+                    <li><strong>DK</strong> (도겸): Lahir dengan nama asli Lee Seokmin (이석민) pada 18 Februari 1997 (umur 27) di Yongin, Gyeonggi, Korea Selatan.</li>
+                    <li><strong>Seungkwan</strong> (승관): Lahir sebagai Boo Seungkwan (부승관) pada 16 Januari 1998 (umur 26) di Busan, Korea Selatan tetapi tumbuh di Jeju.</li>
+                </ul>
+                <h3>Performance Unit</h3>
+                <ul>
+                    <li><strong>Hoshi</strong> (호시): Lahir sebagai Kwon Soonyoung (권순영) pada 15 Juni 1996 (umur 28) di Namyangju, Gyeonggi, Korea Selatan. Ia adalah leader untuk Performance Unit.</li>
+                    <li><strong>Jun</strong> (준): Lahir sebagai Wen Junhui (문준휘) pada 10 Juni 1996 (umur 28) di Shenzhen, Guangdong, Tiongkok. Ia juga seorang aktor di Tiongkok dan tampil di berbagai acara TV.</li>
+                    <li><strong>The8</strong> (디에잇): Lahir sebagai Xu Minghao (徐明浩) pada 7 November 1997 (umur 26) di Anshan, Liaoning, Tiongkok.</li>
+                    <li><strong>Dino</strong> (디노): Lahir sebagai Lee Chan (이찬) pada 11 Februari 1999 (umur 25) di Iksan, Jeollabuk-do, Korea Selatan.</li>
+                </ul>
+            `,
+            gallery: `
+                <h2>Kaleidoskop Konser SEVENTEEN: Memori yang Terabadikan</h2>
+                <div class="photo-row">
+                <img src="https://i.pinimg.com/736x/12/1a/6d/121a6db71f9d9ebd868f6dd5620fff86.jpg" alt="SEVENTEEN 1">
+                <img src="https://i.pinimg.com/736x/0e/77/29/0e7729decce83df3336b4460b8c89f9a.jpg" alt="SEVENTEEN 2">
+                </div>
+                 <div class="photo-row">
+                <img src="https://i.pinimg.com/736x/ed/75/91/ed7591a88b3ec21a3d7bf4518024feb6.jpg" alt="SEVENTEEN 3">
+                <img src="https://i.pinimg.com/736x/90/89/5d/90895d171293469b3aa02ea4850f7037.jpg" alt="SEVENTEEN 4">
+                </div>
+                 <div class="photo-row">
+                <img src="https://i.pinimg.com/736x/ea/41/a4/ea41a47b9d0177895f28817d45f6c224.jpg" alt="SEVENTEEN 5">
+                <img src="https://i.pinimg.com/736x/6f/d7/68/6fd7681ac6a69ecad8728bbf229bb4c9.jpg" alt="SEVENTEEN 6">
+                </div>
+            `
+        };
+
+        function showContent(section) {
+            const contentArea = document.getElementById('content-area');
+            contentArea.innerHTML = contents[section];
+        }
+
+        function changeFontSize(size) {
+            const contentArea = document.getElementById('content-area');
+            if (size === 'small') {
+                contentArea.style.fontSize = '14px';
+            } else if (size === 'medium') {
+                contentArea.style.fontSize = '18px';
+            } else if (size === 'large') {
+                contentArea.style.fontSize = '22px';
+            }
+        }
+
+        function openFullscreen(imgUrl) {
+            const modal = document.getElementById('fullscreenModal');
+            const fullscreenImage = document.getElementById('fullscreenImage');
+            fullscreenImage.src = imgUrl;
+            modal.style.display = 'flex';
+        }
+
+        function closeFullscreen() {
+            const modal = document.getElementById('fullscreenModal');
+            modal.style.display = 'none';
+        }
+
+        // Default: Tampilkan konten Home
+        showContent('home');
+    </script>
+</body>
+</html>
